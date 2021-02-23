@@ -24,12 +24,10 @@ function Bus(name, imgUrl, timesClicked, timesShown){
 
 
 
-var getPrevious = localStorage.getItem('set');
 if(getPrevious){ //
-  var parsedPrevious = JSON.parse(getPrevious);
+  
   for(let i = 0; i < parsedPrevious.length; i++){
-    new Bus(parsedPrevious[i].name, parsedPrevious[i].imgUrl, parsedPrevious[i].timesClicked, parsedPrevious[i].timesShown);
-    console.log('hello');
+    
   }
 } else{
   new Bus('bag', 'img/bag.jpg');
