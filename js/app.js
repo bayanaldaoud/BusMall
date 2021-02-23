@@ -119,7 +119,7 @@ function itemClicked(event){
 
 }
 
-
+                                                             
 
 for(var i = 0; i < getImage.length; i++){ 
   getImage[i].addEventListener('click', itemClicked);
@@ -138,7 +138,7 @@ function renderList(){
 }
 renderList();
 
-
+// chart // 
 
 function graphDataArray(propertyName) {
   var answer = [];
