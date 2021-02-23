@@ -8,6 +8,7 @@ h1{
   margin-left: 600px;
  
 }
+                                              
 
 h2{
   color: rgb(24, 20, 20);
@@ -42,15 +43,9 @@ div img{
 #imgSection{
   min-width: 1000px
 }
-
+                                   
 .titleImg{
   width: 50px;
   height: 50px;
   display: inline-block;
 }
-/* 
-footer{
-  background: white;
-    max-width: 900px;
-    max-height: 300px;
-} */
