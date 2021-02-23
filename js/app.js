@@ -1,9 +1,10 @@
 'use strict';
-
+console.log('js linked!');
 
 var getImage = document.getElementsByTagName('img');
 
 var allItems = [];
+
 
 function Bus(name, imgUrl, timesClicked, timesShown){
   this.name = name;
@@ -23,12 +24,10 @@ function Bus(name, imgUrl, timesClicked, timesShown){
 
 
 
-var getPrevious = localStorage.getItem('set');
 if(getPrevious){ //
-  var parsedPrevious = JSON.parse(getPrevious);
+  
   for(let i = 0; i < parsedPrevious.length; i++){
-    new Bus(parsedPrevious[i].name, parsedPrevious[i].imgUrl, parsedPrevious[i].timesClicked, parsedPrevious[i].timesShown);
-    console.log('hello');
+    
   }
 } else{
   new Bus('bag', 'img/bag.jpg');
@@ -60,7 +59,7 @@ var rounds = 25;
 
 
 
-function itemClicked(event){ 
+function itemClicked(event){
 
   console.log('an image was clicked');
  
@@ -85,13 +84,13 @@ function itemClicked(event){
   if(itemRandomDisplay3 === itemRandomDisplay1 || itemRandomDisplay3 === itemRandomDisplay2){
     getImage[2].src= allItems[nextIndex3].imgUrl;
   }
-
+ 
   allItems[itemRandomDisplay1].timesShown++;
   allItems[itemRandomDisplay2].timesShown++;
   allItems[itemRandomDisplay3].timesShown++;
 
   if(event.srcElement.id === '1'){
-    
+  
     allItems[itemRandomDisplay1].timesClicked++; item1Clicked++;
   } else if (event.srcElement.id === '2'){
     allItems[itemRandomDisplay2].timesClicked++; item2Clicked++;
@@ -101,7 +100,7 @@ function itemClicked(event){
   if(item1Clicked + item2Clicked + item3Clicked > rounds){
     var dataOutput = document.getElementById('msg');
     dataOutput.textContent = 'Here is the click breakdown for user interest';
-  
+ 
     for(var i = 0; i < rounds ; i++){
       getImage[i].removeEventListener('click', itemClicked);
     }
@@ -122,13 +121,14 @@ function itemClicked(event){
 }
 
 
+
 for(var i = 0; i < getImage.length; i++){ 
   getImage[i].addEventListener('click', itemClicked);
 
 }
 
 function renderList(){
-
+ 
   var ulContainer = document.getElementsByTagName('ul')[0];
   for(var i = 0; i < allItems.length; i++){
     var renderLi = document.createElement('li');
@@ -139,3 +139,91 @@ function renderList(){
 }
 renderList();
 
+
+
+function graphDataArray(propertyName) {
+  var answer = [];
+  for (var i = 0; i < allItems.length; i++) {
+    answer[i] = allItems[i][propertyName];
+  }
+  console.log(answer);
+  return answer;
+}
+
+
+function renderGraph(){
+  var ctx = document.getElementById('myChart').getContext('2d');
+
+  var mixedChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: graphDataArray('name'), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Clicks',
+        data:  graphDataArray('timesClicked'),
+        backgroundColor: [
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+          'rgba(150, 255, 220, 0.5)',
+        ],
+      },{
+        label: '# of Views',
+        data: graphDataArray('timesShown'),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(255, 99, 132, 0.5)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            stepSize: 1
+          }
+        }]
+      }
+    }
+  });
+
+}
