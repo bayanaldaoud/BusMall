@@ -159,7 +159,7 @@ function renderGraph(){
   var mixedChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: graphDataArray('name'), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: graphDataArray('name'),
       datasets: [{
         label: '# of Clicks',
         data:  graphDataArray('timesClicked'),
