@@ -1,5 +1,5 @@
 'use strict';
-console.log('js linked!');
+
 
 var getImage = document.getElementsByTagName('img');
 
@@ -23,10 +23,11 @@ function Bus(name, imgUrl, timesClicked, timesShown){
 }
 
 
-
-if(getPrevious){ //
-  
+var getPrevious = localStorage.getItem('set');
+if(getPrevious){ 
+  var parsedPrevious = JSON.parse(getPrevious);
   for(let i = 0; i < parsedPrevious.length; i++){
+    new Bus(parsedPrevious[i].name, parsedPrevious[i].imgUrl, parsedPrevious[i].timesClicked, parsedPrevious[i].timesShown);
     
   }
 } else{
@@ -61,7 +62,7 @@ var rounds = 25;
 
 function itemClicked(event){
 
-  console.log('an image was clicked');
+ 
  
   var itemRandomDisplay1 = Math.floor(Math.random() * allItems.length);
   var itemRandomDisplay2 = Math.floor(Math.random() * allItems.length);
@@ -98,9 +99,7 @@ function itemClicked(event){
     allItems[itemRandomDisplay3].timesClicked++; item3Clicked++;
   }
   if(item1Clicked + item2Clicked + item3Clicked > rounds){
-    var dataOutput = document.getElementById('msg');
-    dataOutput.textContent = 'Here is the click breakdown for user interest';
- 
+    
     for(var i = 0; i < rounds ; i++){
       getImage[i].removeEventListener('click', itemClicked);
     }
